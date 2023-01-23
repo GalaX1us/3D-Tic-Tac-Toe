@@ -12,16 +12,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        Game2D g = new Game2D(3);
-        g.displayGrid();
-        g.play(1);
-        System.out.println();
-        g.displayGrid();
-        g.play(2);
-        System.out.println();
-        g.displayGrid();
+        Game2D game = new Game2D(3);
+        game.displayGrid();
+        game.testRegression();
 
-       System.out.println(g.winGrid()); 
     }
 }

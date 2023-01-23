@@ -22,7 +22,7 @@ public class Game2D extends Game{
         this.initGrid();
     }
 
-    public void play(int cellNumber){ // joue et change de joueur
+    private void play(int cellNumber){ // joue et change de joueur
         
         int line = (cellNumber-1)/this.gridSize;
         int column = (cellNumber-1)%this.gridSize;
@@ -30,70 +30,41 @@ public class Game2D extends Game{
         if (this.currentPlayer == 1) {
             this.grid[line][column].setSymbol('X');
             this.grid[line][column].setIsPlayed(true);
+            if (this.winningMove(line, column, 'X')) {
+                System.out.println("Player 1 wins");
+            }
             this.currentPlayer = 2;
         }else{
             this.grid[line][column].setSymbol('O');
             this.grid[line][column].setIsPlayed(true);
             this.currentPlayer = 1;
+            if (this.winningMove(line, column, 'O')) {
+                System.out.println("Player 2 wins");
+            }
         }
     
     }
 
-    public boolean winGrid(){
-
-        //verifier les lignes
-        for (int line = 0; line < this.gridSize; line++) {
-            char symbol = this.grid[line][0].getSymbol();
-            boolean win = true;
-            for (int column = 1; column < this.gridSize; column++) {
-                if (this.grid[line][column].getSymbol() != symbol) {
-                    win = false;
-                }
-            }
-            if (win) {
-                return true;
-            }
-        }
-
-        //verifier les colonnes
-        for (int column = 0; column < this.gridSize; column++) {
-            char symbol = this.grid[0][column].getSymbol();
-            boolean win = true;
-            for (int line = 1; line < this.gridSize; line++) {
-                if (this.grid[line][column].getSymbol() != symbol) {
-                    win = false;
-                }
-            }
-            if (win) {
-                return true;
-            }
-        }
-
-        //verifier les diagonales
-        char symbol = this.grid[0][0].getSymbol();
-        boolean win = true;
-        for (int i = 1; i < this.gridSize; i++) {
-            if (this.grid[i][i].getSymbol() != symbol) {
-                win = false;
-            }
-        }
-        if (win) {
+    private boolean winningMove(int line, int column, char symbol)
+    {
+        if (this.grid[line][0].getSymbol() == symbol && this.grid[line][1].getSymbol() == symbol && this.grid[line][2].getSymbol() == symbol) {
             return true;
         }
-
-        symbol = this.grid[0][this.gridSize-1].getSymbol();
-        win = true;
-        for (int i = 1; i < this.gridSize; i++) {
-            if (this.grid[i][this.gridSize-1-i].getSymbol() != symbol) {
-                win = false;
-            }
-        }
-        if (win) {
+        if (this.grid[0][column].getSymbol() == symbol && this.grid[1][column].getSymbol() == symbol && this.grid[2][column].getSymbol() == symbol) {
             return true;
         }
-
+        if (this.grid[0][0].getSymbol() == symbol && this.grid[1][1].getSymbol() == symbol && this.grid[2][2].getSymbol() == symbol) {
+            return true;
+        }
+        if (this.grid[0][2].getSymbol() == symbol && this.grid[1][1].getSymbol() == symbol && this.grid[2][0].getSymbol() == symbol) {
+            return true;
+        }
         return false;
     }
+
+    
+
+    
 
     private void initGrid(){
         for (int line = 0; line < this.gridSize; line++) {
@@ -119,6 +90,15 @@ public class Game2D extends Game{
                 System.out.println();
             }
         }
+    }
+
+
+    public void testRegression()
+    {
+        // Test 1 
+        this.displayGrid();
+        this.play(1);
+        this.displayGrid();
     }
 
    
