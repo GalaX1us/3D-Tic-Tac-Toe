@@ -13,7 +13,6 @@ public class App
     public static void main( String[] args )
     {
         Game2D game = new Game2D(3);
-        game.displayGrid();
         game.testRegression();
 
     }

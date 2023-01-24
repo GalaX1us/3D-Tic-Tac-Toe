@@ -47,10 +47,13 @@ public class Game2D extends Game{
 
     private boolean winningMove(int line, int column, char symbol)
     {
-        if (this.grid[line][0].getSymbol() == symbol && this.grid[line][1].getSymbol() == symbol && this.grid[line][2].getSymbol() == symbol) {
+        if (this.grid[line][0].getSymbol() == symbol && this.grid[line][1].getSymbol() == symbol && this.grid[line][2].getSymbol() == symbol ) {
+            System.out.println("ligne !");
             return true;
+            
         }
         if (this.grid[0][column].getSymbol() == symbol && this.grid[1][column].getSymbol() == symbol && this.grid[2][column].getSymbol() == symbol) {
+            System.out.println("column ! ");
             return true;
         }
         if (this.grid[0][0].getSymbol() == symbol && this.grid[1][1].getSymbol() == symbol && this.grid[2][2].getSymbol() == symbol) {
@@ -90,15 +93,22 @@ public class Game2D extends Game{
                 System.out.println();
             }
         }
+        System.out.println();
+        System.out.println();
     }
 
 
-    public void testRegression()
+    public void testRegression() // pour verifier si ça détecte bien quand on gagne 
     {
         // Test 1 
         this.displayGrid();
         this.play(1);
-        this.displayGrid();
+        this.play(4);
+        this.play(2);
+        this.play(5);
+        this.play(3);
+
+        displayGrid();
     }
 
    
