@@ -63,7 +63,15 @@ public class Cell {
     }
 
     public char getSymbol() {
-        return symbol;
+        if (this.getIsPlayed())
+        {
+            return symbol;
+        }
+        else 
+        {
+            return (char) index; 
+        }
+        
     }
     public void setSymbol(char symbol) {
         this.symbol = symbol;
