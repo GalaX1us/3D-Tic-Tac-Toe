@@ -6,12 +6,15 @@ public class Cell {
 
     private Boolean isPlayed;
     private Boolean isSelected;
+    private Boolean winningMove;
 
     public Cell() {
         this.index = 0;
         this.symbol = 'X';
         this.isPlayed = false;
         this.isSelected = false;
+        this.winningMove = false;
+        
     }
 
     public Cell(int index) {
@@ -19,6 +22,7 @@ public class Cell {
         this.symbol = 'X';
         this.isPlayed = false;
         this.isSelected = false;
+        this.winningMove = false;
     }
 
     public void displayCell(){
@@ -31,23 +35,33 @@ public class Cell {
         if (isSelected) {
             str = ">"+str+"<";
         }
+        if (winningMove) {
+            str = "["+str+"]";
+        }
         else{
             str = " "+str+" ";
         }
         System.out.print(str);
     }
+
     public int getIndex() {
         return index;
     }
     public void setIndex(int index) {
         this.index = index;
     }
+
     public Boolean getIsPlayed() {
         return isPlayed;
     }
     public void setIsPlayed(Boolean isPlayed) {
         this.isPlayed = isPlayed;
     }
+
+    public void setWinning(){
+        this.winningMove=true;
+    }
+
     public char getSymbol() {
         return symbol;
     }

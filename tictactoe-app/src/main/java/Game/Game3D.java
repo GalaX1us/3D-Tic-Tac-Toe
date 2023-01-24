@@ -29,7 +29,7 @@ public class Game3D extends Game {
         for (int layer = 0; layer < gridSize; layer++) {
             for (int ligne = 0; ligne < gridSize; ligne++) {
                 for (int elem = 0; elem < gridSize; elem++) {
-                    this.grid[layer][ligne][elem] = new Cell((ligne+1)*(elem+1));
+                    this.grid[layer][ligne][elem] = new Cell((ligne*3)+(elem+1));
                 }
             }
         }
