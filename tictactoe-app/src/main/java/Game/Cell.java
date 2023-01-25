@@ -8,22 +8,29 @@ public class Cell {
     private Boolean isSelected;
     private Boolean winningMove;
 
-    public Cell() {
+    private int size; 
+
+    public Cell(int size) {
         this.index = 0;
         this.symbol = 'X';
         this.isPlayed = false;
         this.isSelected = false;
         this.winningMove = false;
+        this.size = size;
         
     }
 
-    public Cell(int index) {
+    public Cell(int size, int index) {
         this.index = index;
         this.symbol = 'X';
         this.isPlayed = false;
         this.isSelected = false;
         this.winningMove = false;
+        this.size = size;
+
+
     }
+    
 
     public void displayCell(){
         String str = "";
@@ -41,9 +48,38 @@ public class Cell {
         else{
             str = " "+str+" ";
         }
+        str = formatStr(str);
         System.out.print(str);
     }
 
+    private String formatStr(String str)
+    
+    {
+        String s = str;
+        int strSize = str.length();
+        
+        String strMax = String.valueOf(this.size*this.size);
+        int strMaxSize = strMax.length()+2;
+
+        if (strSize == strMaxSize)
+        {
+            return str;
+        }
+        
+        for (int i = strSize; i < strMaxSize; i++)
+        {   
+            if (i%2 == 0)
+            {
+                s = s+" ";
+            }
+            else
+            {
+                s = " "+s;
+            }
+        }
+        return s;
+
+    }
     public int getIndex() {
         return index;
     }

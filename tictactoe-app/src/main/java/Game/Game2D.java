@@ -182,7 +182,27 @@ public class Game2D extends Game{
             }
             return true;
         }
+
+        //pour gerer l'égalité 
+        boolean full = true;
+        for (int i=0; i<gridSize && full ; i++ )
+        {
+            for (int j=0; j<gridSize && full; j++ )
+            {
+                if (!this.grid[i][j].getIsPlayed())
+                {
+                    full = false;
+                }
+            }
+        }
+        if (full) {
+            System.out.println("Egalité");
+            this.isOver = true;
+            return false; 
+        }
+
         return false;
+
     }
 
     
@@ -192,7 +212,7 @@ public class Game2D extends Game{
     private void initGrid(){
         for (int line = 0; line < this.gridSize; line++) {
             for (int column = 0; column < this.gridSize; column++) {
-                this.grid[line][column] = new Cell(line*this.gridSize+column+1); //verifier que ça marche bien ici 
+                this.grid[line][column] = new Cell(this.gridSize , line*this.gridSize+column+1); //verifier que ça marche bien ici 
             }
         }
     }
@@ -201,13 +221,15 @@ public class Game2D extends Game{
         for (int line = 0; line < this.gridSize; line++) {
             for (int column = 0; column < this.gridSize; column++) {
                 this.grid[line][column].displayCell();  
-                if (column<this.gridSize-1) {
+                if (column<this.gridSize) {
                     System.out.print("|"); 
                 }
             }
             System.out.println();
             if (line<this.gridSize-1) {
-                for (int i = 0; i < this.gridSize+(3*(this.gridSize-1)); i++) {
+
+                int nbMax = String.valueOf(this.gridSize*this.gridSize).length()+3; 
+                for (int i = 0; i < nbMax*this.gridSize; i++) {
                     System.out.print("-"); 
                 }
                 System.out.println();
