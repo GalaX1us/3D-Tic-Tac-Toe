@@ -6,7 +6,7 @@ public abstract class Game {
     public Player player1;
     public Player player2;
 
-    public int currentPlayer;
+    public Player currentPlayer;
 
     public abstract void displayGrid();
 }
