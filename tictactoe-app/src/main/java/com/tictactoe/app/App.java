@@ -12,12 +12,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Game2D game = new Game2D(20);
-
-        while (!game.isOver)
-        {
-            game.play_interface();
-        }
-        game.displayGrid();
+        Game game = new Game3D(4);
+        game.play();
     }
 }

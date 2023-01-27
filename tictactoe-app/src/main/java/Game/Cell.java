@@ -8,27 +8,21 @@ public class Cell {
     private Boolean isSelected;
     private Boolean winningMove;
 
-    private int size; 
+    private int maxStrSize; 
 
     public Cell(int size) {
         this.index = 0;
-        this.symbol = 'X';
+        this.symbol = '-';
         this.isPlayed = false;
         this.isSelected = false;
         this.winningMove = false;
-        this.size = size;
+        this.maxStrSize = String.valueOf(size*size).length()+2;
         
     }
 
     public Cell(int size, int index) {
+        this(size);
         this.index = index;
-        this.symbol = 'X';
-        this.isPlayed = false;
-        this.isSelected = false;
-        this.winningMove = false;
-        this.size = size;
-
-
     }
     
 
@@ -57,16 +51,13 @@ public class Cell {
     {
         String s = str;
         int strSize = str.length();
-        
-        String strMax = String.valueOf(this.size*this.size);
-        int strMaxSize = strMax.length()+2;
 
-        if (strSize == strMaxSize)
+        if (strSize == maxStrSize)
         {
             return str;
         }
         
-        for (int i = strSize; i < strMaxSize; i++)
+        for (int i = strSize; i < maxStrSize; i++)
         {   
             if (i%2 == 0)
             {
@@ -117,6 +108,10 @@ public class Cell {
     }
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public int getLength(){
+        return this.maxStrSize;
     }
    
 }

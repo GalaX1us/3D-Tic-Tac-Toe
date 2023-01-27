@@ -3,19 +3,35 @@ package Player;
 import java.util.Scanner;
 
 public class Human extends Player {
-    
-    public String askCoords(Boolean is3D){
 
-        Scanner myObj = new Scanner(System.in); // Create a Scanner object
-        if (is3D){
-            System.out.println("Enter your move (a1,a2,b3 ...):\n>");
-        }else{
-            System.out.println("Enter your move (1,2,3 ...):\n>");
-        }
+    public Human(String name, char symbol) {
+        this.name = name;
+        this.symbol = symbol;
+    }
+
+    public String askCoords(){
+
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("C'est a"+this.name+" de jouer");
+        System.out.println("Entrer le numéro de la case ou vous voulez jouer");
         
-        String coords = myObj.nextLine();  // Read user input
-
+        String index = myObj.nextLine();
+    
         myObj.close();
-        return coords;
+
+        return index; 
+    }
+
+    public int askValidation(String coup){
+
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Vous avez choisi la case "+coup);
+        System.out.println("taper 1 pour confirmer, 2 pour annuler");
+        
+        int val = myObj.nextInt();
+    
+        myObj.close();
+
+        return val; 
     }
 }

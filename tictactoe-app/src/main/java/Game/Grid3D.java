@@ -15,7 +15,7 @@ public class Grid3D {
         for (int layer = 0; layer < gridSize; layer++) {
             for (int ligne = 0; ligne < gridSize; ligne++) {
                 for (int elem = 0; elem < gridSize; elem++) {
-                    this.grid[layer][ligne][elem] = new Cell((ligne*3)+(elem+1));
+                    this.grid[layer][ligne][elem] = new Cell(this.gridSize, (ligne*3)+(elem+1));
                 }
             }
         }
@@ -24,8 +24,40 @@ public class Grid3D {
     public Cell[][][] getGrid() {
         return grid;
     }
+
+    public void displayGrid(){
+        int cellLen = this.grid[0][0][0].getLength();
+
+        for (int ligne = 0; ligne < gridSize; ligne++) {
+            for (int layer = 0; layer < gridSize; layer++) {
+                for (int elem = 0; elem < gridSize; elem++) {
+
+                    this.grid[layer][ligne][elem].displayCell();  
+
+
+                    if (elem<gridSize-1) {
+                        System.out.print("|"); 
+                    }
+                }
+                System.out.print("      ");               
+            }
+            System.out.println();
+            if (ligne<gridSize-1) {
+                for (int l = 0; l < gridSize; l++) {
+                    for (int i = 0; i < cellLen*3+gridSize-1; i++) {
+                        System.out.print("-"); 
+                    }
+                    if (l<gridSize-1) {
+                        System.out.print("      ");
+                    }
+                    
+                }
+            }
+            System.out.println();
+        }
+    }
     
-    private Boolean WinningMove(int layer, int line, int column, char symbol) {
+    private Boolean winningMove(int layer, int line, int column, char symbol) {
         Boolean value = CHECK_HORIZONTALLY(layer, line, column, symbol) ||
                     CHECK_VERTICALLY(layer, line, column, symbol) ||
                     CHECK_DIAGONALLY_LR(layer, line, column, symbol) ||
@@ -50,7 +82,12 @@ public class Grid3D {
             if(this.grid[layer][line][j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[layer][line][j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -62,14 +99,15 @@ public class Grid3D {
             if(this.grid[layer][j][column].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[layer][j][column].setWinning();
+            }
+            return true;
+        }
         return false;
     }
-    
-    /*
-     * Cheque las posibles jugadas que sean diagonal sencilla de izquierda a
-     * derecha
-     */
+   
     private Boolean CHECK_DIAGONALLY_LR (int layer, int line, int column, char symbol) {
         int w = 0;
                         
@@ -77,7 +115,12 @@ public class Grid3D {
             if(this.grid[layer][j][j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[layer][j][j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -89,7 +132,12 @@ public class Grid3D {
             if(this.grid[layer][this.gridSize-1-j][this.gridSize-1-j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[layer][this.gridSize-1-j][this.gridSize-1-j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -101,7 +149,12 @@ public class Grid3D {
             if(this.grid[j][line][column].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][line][column].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -113,7 +166,12 @@ public class Grid3D {
             if(this.grid[j][line][j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][line][j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -125,7 +183,12 @@ public class Grid3D {
             if(this.grid[j][line][this.gridSize-1-j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][line][this.gridSize-1-j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -137,7 +200,12 @@ public class Grid3D {
             if(this.grid[j][j][column].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][j][column].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -149,7 +217,12 @@ public class Grid3D {
             if(this.grid[j][this.gridSize-1-j][column].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][this.gridSize-1-j][column].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -161,7 +234,12 @@ public class Grid3D {
             if(this.grid[j][j][j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][j][j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -173,7 +251,12 @@ public class Grid3D {
             if(this.grid[j][this.gridSize-1-j][j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][this.gridSize-1-j][j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -184,7 +267,12 @@ public class Grid3D {
             if(this.grid[j][j][this.gridSize-1-j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][j][this.gridSize-1-j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
     
@@ -196,7 +284,12 @@ public class Grid3D {
             if(this.grid[j][this.gridSize-1-j][this.gridSize-1-j].getSymbol() == symbol)
                 w++; 
         }
-        if (w==this.gridSize) return true;
+        if (w==this.gridSize){
+            for(int j = 0; j<this.gridSize ; j++) {   
+                this.grid[j][this.gridSize-1-j][this.gridSize-1-j].setWinning();
+            }
+            return true;
+        }
         return false;
     }
 }

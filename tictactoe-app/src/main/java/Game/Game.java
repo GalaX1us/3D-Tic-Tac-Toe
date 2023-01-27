@@ -8,5 +8,5 @@ public abstract class Game {
 
     public Player currentPlayer;
 
-    public abstract void displayGrid();
+    public abstract void play();
 }
