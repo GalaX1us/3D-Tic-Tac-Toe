@@ -9,6 +9,14 @@ public class Human extends Player {
         this.symbol = symbol;
     }
 
+    public char getSymbol() {
+        return this.symbol;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
     public String askCoords(){
 
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object

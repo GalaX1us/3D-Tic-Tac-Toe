@@ -46,6 +46,18 @@ public class Grid2D {
         System.out.println();
     }
 
+    public boolean isFull()
+    {
+        for (int line = 0; line < this.gridSize; line++) {
+            for (int column = 0; column < this.gridSize; column++) {
+                if (!this.grid[line][column].isPlayed()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean winningMove(int line, int column, char symbol)
     {
         boolean l = true;
@@ -168,6 +180,16 @@ public class Grid2D {
     public boolean getIsOver() {
         return isOver;
     }
+
+    public void setSymbol(int index, char symbol)
+    {
+        int line = (index-1)/this.gridSize;
+        int column = (index-1)%this.gridSize;
+        this.grid[line][column].setSymbol(symbol);
+        this.grid[line][column].setIsPlayed(true);
+    }
+
+
 
 
 

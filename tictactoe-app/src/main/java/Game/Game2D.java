@@ -42,6 +42,37 @@ public class Game2D extends Game{
         return coords;
     }
 
+    public boolean validationInput(String coup)
+    {
+        int validation = 0;
+        String rawValidation;
+        Boolean valid = false;
+
+        do 
+        {
+            rawValidation = currentPlayer.askValidation(coup);
+            try
+            {
+                validation = Integer.parseInt(rawValidation);
+                if (validation < 1 || validation > 2) 
+                {
+                    System.out.println("Veuillez entrer un nombre entre 1 et 2");
+                }
+                else
+                {
+                    valid = true;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println("Veuillez entrer un nombre");
+            }
+        }while(!valid);
+
+        return (validation == 1); 
+            
+    }
+
 
 
 
@@ -52,50 +83,54 @@ public class Game2D extends Game{
         this.grid = new Grid2D(size);
     }
 
-    public void play_interface()
-    {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        boolean hasPlayed = false;
-        do
-        {
-            this.grid.displayGrid();
-            System.out.println("C'est au joueur "+this.currentPlayer+" de jouer");
-            System.out.println("Entrer le numéro de la case ou vous voulez jouer");
-            
+    public void makeMove(int cellNumber){ // joue et change de joueur
+        
+        int line = (cellNumber-1)/this.grid.getGridSize();
+        int column = (cellNumber-1)%this.grid.getGridSize();
 
-            boolean correctInput = true;
-            int index = myObj.nextInt();
-            System.out.println();
+        this.grid.setSymbol( cellNumber, currentPlayer.getSymbol());
 
-            
-            this.grid.selectCase(index);
-            this.grid.displayGrid();
-            System.out.println("Vous avez choisi la case "+index);
-            System.out.println("taper 1 pour confirmer, 2 pour annuler");
-            int confirm = myObj.nextInt();
-            System.out.println();
 
-            if (confirm == 1) {
-                this.play(index);
-                hasPlayed = true;
-                this.grid.unselectCase(index);
+
+            if (this.winningMove(line, column,currentPlayer.getSymbol())) {
+                System.out.println("Victoire de "+currentPlayer.getName());
+                this.grid.isOver = true;
+            }
+            else if (this.grid.isFull()) {
+                System.out.println("Match nul");
+                this.grid.isOver = true;
             }
             else{
-                this.grid.unselectCase(index);
+                if (this.currentPlayer == this.player1) {
+                    this.currentPlayer = this.player2;
+                }
+                else{
+                    this.currentPlayer = this.player1;
+                }
             }
-        }while (!hasPlayed);
-    }
 
-    public void play(int cellNumber){ // joue et change de joueur
-        
-       
-    
-    }
+        }
+
 
     @Override
     public void play() {
-        // TODO Auto-generated method stub
-        
+        while (!this.grid.isOver) {
+
+            int coords; 
+            boolean valid = false;
+            do 
+            {
+                this.grid.displayGrid();
+                coords = this.coordsInput();
+                this.grid.selectCase(coords);
+                valid = this.validationInput(coords);
+            } while (!valid);
+            this.makeMove(coords);
+
+
+
+
+        }
     }
 
 
@@ -107,18 +142,18 @@ public class Game2D extends Game{
 
    
 
-    
+
 
 // pour taille 3x3 
     public void testRegression() // pour verifier si ça détecte bien quand on gagne 
     {
         // Test 1 
         this.grid.displayGrid();
-        this.play(1);
-        this.play(4);
-        this.play(2);
-        this.play(5);
-        this.play(3);
+        this.makeMove(1);
+        this.makeMove(4);
+        this.makeMove(2);
+        this.makeMove(5);
+        this.makeMove(3);
 
         this.grid.displayGrid();
     }
@@ -127,11 +162,11 @@ public class Game2D extends Game{
     {
 
         this.grid.displayGrid();
-        this.play(1);
-        this.play(2);
-        this.play(4);
-        this.play(5);
-        this.play(7);
+        this.makeMove(1);
+        this.makeMove(2);
+        this.makeMove(4);
+        this.makeMove(5);
+        this.makeMove(7);
 
         this.grid.displayGrid();
     }
@@ -140,11 +175,11 @@ public class Game2D extends Game{
     {
 
         this.grid.displayGrid();
-        this.play(1);
-        this.play(2);
-        this.play(5);
-        this.play(4);
-        this.play(9);
+        this.makeMove(1);
+        this.makeMove(2);
+        this.makeMove(5);
+        this.makeMove(4);
+        this.makeMove(9);
 
         this.grid.displayGrid();
     }
@@ -152,11 +187,11 @@ public class Game2D extends Game{
     {
 
         this.grid.displayGrid();
-        this.play(3);
-        this.play(2);
-        this.play(5);
-        this.play(4);
-        this.play(7);
+        this.makeMove(3);
+        this.makeMove(2);
+        this.makeMove(5);
+        this.makeMove(4);
+        this.makeMove(7);
 
         this.grid.displayGrid();
     }
@@ -165,10 +200,10 @@ public class Game2D extends Game{
     public void testRegression5()
     {
         for (int i = 1; i <= this.grid.getGridSize(); i++) {
-            this.play(i);
+            this.makeMove(i);
             if (i < this.grid.getGridSize())
             {
-                this.play(i+this.grid.getGridSize());
+                this.makeMove(i+this.grid.getGridSize());
             }
             
 
