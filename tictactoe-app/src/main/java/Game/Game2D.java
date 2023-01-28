@@ -11,23 +11,45 @@ import java.util.Scanner;  // Import the Scanner class
 
 public class Game2D extends Game{
 
-    private int gridSize;
-    public Cell[][]grid;
-    public boolean isOver;
+    public Human player1;
+    public Human player2;
+    public Grid2D grid;
+    public Player currentPlayer;
+
+    //verifier ce que l'on met en public ou private
+
+    public int coordsInput(){
+        int coords = 0; 
+        String rawCoords;
+        Boolean valid = false;
+        do{
+            rawCoords = currentPlayer.askCoords();
+            try{
+                
+                coords = Integer.parseInt(rawCoords);
+                if (coords < 1 || coords > this.grid.getGridSize()*this.grid.getGridSize()) {
+                    System.out.println("Veuillez entrer un nombre entre 1 et "+this.grid.getGridSize()*this.grid.getGridSize());
+                }else{
+                    valid = true;
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("Veuillez entrer un nombre");
+            }
+
+        }while(!valid);
+
+        return coords;
+    }
+
 
 
 
     public Game2D(int size) {
-        this.player1 = new Human();
-        this.player2 = new Human();
-        this.isOver = false;
-        this.currentPlayer = 1;
-
-
-        this.gridSize = size;
-        this.grid = new Cell[size][size];
-
-        this.initGrid();
+        this.player1 = new Human("James", 'X');
+        this.player2 = new Human("George", 'O');
+        this.currentPlayer = this.player1;
+        this.grid = new Grid2D(size);
     }
 
     public void play_interface()
@@ -36,7 +58,7 @@ public class Game2D extends Game{
         boolean hasPlayed = false;
         do
         {
-            displayGrid();
+            this.grid.displayGrid();
             System.out.println("C'est au joueur "+this.currentPlayer+" de jouer");
             System.out.println("Entrer le numéro de la case ou vous voulez jouer");
             
@@ -46,8 +68,8 @@ public class Game2D extends Game{
             System.out.println();
 
             
-            selectCase(index);
-            this.displayGrid();
+            this.grid.selectCase(index);
+            this.grid.displayGrid();
             System.out.println("Vous avez choisi la case "+index);
             System.out.println("taper 1 pour confirmer, 2 pour annuler");
             int confirm = myObj.nextInt();
@@ -56,255 +78,107 @@ public class Game2D extends Game{
             if (confirm == 1) {
                 this.play(index);
                 hasPlayed = true;
-                unselectCase(index);
+                this.grid.unselectCase(index);
             }
             else{
-                unselectCase(index);
+                this.grid.unselectCase(index);
             }
         }while (!hasPlayed);
-        
-
-
-
-
-    }
-
-    private void selectCase (int index)
-    {
-        int line = (index-1)/this.gridSize;
-        int column = (index-1)%this.gridSize;
-        this.grid[line][column].setIsSelected(true);
-    }
-    private void unselectCase (int index)
-    {
-        int line = (index-1)/this.gridSize;
-        int column = (index-1)%this.gridSize;
-        this.grid[line][column].setIsSelected(false);
     }
 
     public void play(int cellNumber){ // joue et change de joueur
         
-        int line = (cellNumber-1)/this.gridSize;
-        int column = (cellNumber-1)%this.gridSize;
-
-        if (this.currentPlayer == 1) {
-            this.grid[line][column].setSymbol('X');
-            this.grid[line][column].setIsPlayed(true);
-            if (this.winningMove(line, column, 'X')) {
-                System.out.println("Player 1 wins");
-                this.isOver = true;
-            }
-            this.currentPlayer = 2;
-        }else{
-            this.grid[line][column].setSymbol('O');
-            this.grid[line][column].setIsPlayed(true);
-            this.currentPlayer = 1;
-            if (this.winningMove(line, column, 'O')) {
-                System.out.println("Player 2 wins");
-                this.isOver = true; 
-            }
-        }
+       
     
     }
 
-    private boolean winningMove(int line, int column, char symbol)
-    {
-        boolean l = true;
-        for (int i=0; i<gridSize ; i++ )
-        {
-            if (this.grid[line][i].getSymbol() != symbol)
-            {
-                l = false ; 
-            }
-
-        }
-        if (l) {
-            for (int i=0; i<gridSize ; i++ )
-            {
-                this.grid[line][i].setWinning();
-            }
-            return true;
-            
-        }
-
-        //pour les colonnes 
-        boolean c = true;
-        for (int i=0; i<gridSize ; i++ )
-        {
-            if (this.grid[i][column].getSymbol() != symbol)
-            {
-                c = false ; 
-            }
-
-        } 
-        if (c) {
-            for (int i=0; i<gridSize ; i++ )
-            {
-                this.grid[i][column].setWinning();
-            }
-            return true;
-        }
-
-        //pour les diagonales
-
-        boolean diagonal1 = true;
-        for (int i=0; i<gridSize ; i++ )
-        {
-            if (this.grid[i][i].getSymbol() != symbol)
-            {
-                diagonal1 = false ; 
-            }
-
-        }
-
-        if (diagonal1) {
-            for (int i=0; i<gridSize ; i++ )
-            {
-                this.grid[i][i].setWinning();
-            }
-            return true;
-        }
-
-        // pour la deuxième diagonale
-        boolean diagonal2 = true;
-        for (int i=0; i<gridSize ; i++ )
-        {
-            if (this.grid[i][gridSize-i-1].getSymbol() != symbol)
-            {
-                diagonal2 = false ; 
-            }
-
-        }
-        if (diagonal2) {
-            for (int i=0; i<gridSize ; i++ )
-            {
-                this.grid[i][gridSize-i-1].setWinning();
-            }
-            return true;
-        }
-
-        //pour gerer l'égalité 
-        boolean full = true;
-        for (int i=0; i<gridSize && full ; i++ )
-        {
-            for (int j=0; j<gridSize && full; j++ )
-            {
-                if (!this.grid[i][j].getIsPlayed())
-                {
-                    full = false;
-                }
-            }
-        }
-        if (full) {
-            System.out.println("Egalité");
-            this.isOver = true;
-            return false; 
-        }
-
-        return false;
-
+    @Override
+    public void play() {
+        // TODO Auto-generated method stub
+        
     }
+
+
+   
 
     
 
     
 
-    private void initGrid(){
-        for (int line = 0; line < this.gridSize; line++) {
-            for (int column = 0; column < this.gridSize; column++) {
-                this.grid[line][column] = new Cell(this.gridSize , line*this.gridSize+column+1); //verifier que ça marche bien ici 
-            }
-        }
-    }
+   
 
-    public void displayGrid(){
-        for (int line = 0; line < this.gridSize; line++) {
-            for (int column = 0; column < this.gridSize; column++) {
-                this.grid[line][column].displayCell();  
-                if (column<this.gridSize) {
-                    System.out.print("|"); 
-                }
-            }
-            System.out.println();
-            if (line<this.gridSize-1) {
-
-                int nbMax = String.valueOf(this.gridSize*this.gridSize).length()+3; 
-                for (int i = 0; i < nbMax*this.gridSize; i++) {
-                    System.out.print("-"); 
-                }
-                System.out.println();
-            }
-        }
-        System.out.println();
-        System.out.println();
-    }
+    
 
 // pour taille 3x3 
     public void testRegression() // pour verifier si ça détecte bien quand on gagne 
     {
         // Test 1 
-        this.displayGrid();
+        this.grid.displayGrid();
         this.play(1);
         this.play(4);
         this.play(2);
         this.play(5);
         this.play(3);
 
-        displayGrid();
+        this.grid.displayGrid();
     }
 
     public void testRegression2()// test regression pour tester les combinaisons gagnantes verticales 
     {
 
-        displayGrid();
+        this.grid.displayGrid();
         this.play(1);
         this.play(2);
         this.play(4);
         this.play(5);
         this.play(7);
 
-        displayGrid();
+        this.grid.displayGrid();
     }
 
     public void testRegression3()// test regression pour tester les combinaisons gagnantes diagonales 
     {
 
-        displayGrid();
+        this.grid.displayGrid();
         this.play(1);
         this.play(2);
         this.play(5);
         this.play(4);
         this.play(9);
 
-        displayGrid();
+        this.grid.displayGrid();
     }
     public void testRegression4()// test regression pour tester les combinaisons gagnantes diagonale2  
     {
 
-        displayGrid();
+        this.grid.displayGrid();
         this.play(3);
         this.play(2);
         this.play(5);
         this.play(4);
         this.play(7);
 
-        displayGrid();
+        this.grid.displayGrid();
     }
 
     //  taille gridSize
     public void testRegression5()
     {
-        for (int i = 1; i <= gridSize; i++) {
+        for (int i = 1; i <= this.grid.getGridSize(); i++) {
             this.play(i);
-            if (i < gridSize)
+            if (i < this.grid.getGridSize())
             {
-                this.play(i+gridSize);
+                this.play(i+this.grid.getGridSize());
             }
             
 
         }
-        displayGrid();
+        this.grid.displayGrid();
     }
+
+
+
+
 
    
 }
