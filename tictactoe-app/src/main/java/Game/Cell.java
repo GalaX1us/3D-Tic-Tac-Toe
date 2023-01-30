@@ -78,7 +78,7 @@ public class Cell {
         this.index = index;
     }
 
-    public Boolean getIsPlayed() {
+    public Boolean isPlayed() {
         return isPlayed;
     }
     public void setIsPlayed(Boolean isPlayed) {
@@ -90,7 +90,7 @@ public class Cell {
     }
 
     public char getSymbol() {
-        if (this.getIsPlayed())
+        if (this.isPlayed())
         {
             return symbol;
         }

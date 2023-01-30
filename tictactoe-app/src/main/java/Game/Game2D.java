@@ -42,7 +42,7 @@ public class Game2D extends Game{
         return coords;
     }
 
-    public boolean validationInput(String coup)
+    public boolean validationInput(int coup)
     {
         int validation = 0;
         String rawValidation;
@@ -50,7 +50,7 @@ public class Game2D extends Game{
 
         do 
         {
-            rawValidation = currentPlayer.askValidation(coup);
+            rawValidation = currentPlayer.askValidation(Integer.toString(coup));
             try
             {
                 validation = Integer.parseInt(rawValidation);
@@ -76,9 +76,10 @@ public class Game2D extends Game{
 
 
 
-    public Game2D(int size) {
-        this.player1 = new Human("James", 'X');
-        this.player2 = new Human("George", 'O');
+    public Game2D(int size, Scanner scanner) {
+        this.scanner = scanner;
+        this.player1 = new Human("James", 'X', scanner);
+        this.player2 = new Human("George", 'O', scanner);
         this.currentPlayer = this.player1;
         this.grid = new Grid2D(size);
     }
@@ -92,7 +93,7 @@ public class Game2D extends Game{
 
 
 
-            if (this.winningMove(line, column,currentPlayer.getSymbol())) {
+            if (this.grid.winningMove(line, column, currentPlayer.getSymbol())) {
                 System.out.println("Victoire de "+currentPlayer.getName());
                 this.grid.isOver = true;
             }

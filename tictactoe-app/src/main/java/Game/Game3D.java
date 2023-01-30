@@ -2,6 +2,9 @@ package Game;
 
 import Player.Human;
 import Player.Player;
+
+import java.util.Scanner;
+
 import Game.Cell;
 
 public class Game3D extends Game {
@@ -12,9 +15,10 @@ public class Game3D extends Game {
 
     private Grid3D grid;
 
-    public Game3D(int size) {
-        this.player1 = new Human("James", 'X');
-        this.player2 = new Human("George", 'O');
+    public Game3D(int size, Scanner scanner) {
+        this.scanner = scanner;
+        this.player1 = new Human("James", 'X', scanner);
+        this.player2 = new Human("George", 'O', scanner);
         this.currentPlayer = this.player1;
 
         this.grid = new Grid3D(size);

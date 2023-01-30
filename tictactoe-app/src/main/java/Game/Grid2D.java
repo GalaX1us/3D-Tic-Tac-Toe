@@ -8,6 +8,7 @@ public class Grid2D {
 
     public Grid2D(int gridSize) {
         this.gridSize = gridSize;
+        this.grid = new Cell[gridSize][gridSize];
         this.initGrid();
         this.isOver = false;
     }
@@ -140,7 +141,7 @@ public class Grid2D {
         {
             for (int j=0; j<gridSize && full; j++ )
             {
-                if (!this.grid[i][j].getIsPlayed())
+                if (!this.grid[i][j].isPlayed())
                 {
                     full = false;
                 }

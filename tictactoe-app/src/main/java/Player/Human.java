@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class Human extends Player {
 
-    public Human(String name, char symbol) {
+    public Human(String name, char symbol, Scanner scanner) {
         this.name = name;
         this.symbol = symbol;
+        this.scanner = scanner;
     }
 
     public char getSymbol() {
@@ -19,27 +20,21 @@ public class Human extends Player {
 
     public String askCoords(){
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("C'est a"+this.name+" de jouer");
-        System.out.println("Entrer le numéro de la case ou vous voulez jouer");
+        System.out.println("C'est a "+this.name+" de jouer");
+        System.out.println("Entrer le numéro de la case ou vous voulez jouer :");
         
-        String index = myObj.nextLine();
+        String index = this.scanner.nextLine();
     
-        myObj.close();
-
         return index; 
     }
 
-    public int askValidation(String coup){
+    public String askValidation(String coup){
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Vous avez choisi la case "+coup);
         System.out.println("taper 1 pour confirmer, 2 pour annuler");
         
-        int val = myObj.nextInt();
+        String val = scanner.nextLine();
     
-        myObj.close();
-
         return val; 
     }
 }

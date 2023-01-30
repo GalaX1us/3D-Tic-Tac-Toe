@@ -8,6 +8,7 @@ public class Grid3D {
 
     public Grid3D(int gridSize) {
         this.gridSize = gridSize;
+        this.grid = new Cell[gridSize][gridSize][gridSize];
         this.initGrid();
     }
 
