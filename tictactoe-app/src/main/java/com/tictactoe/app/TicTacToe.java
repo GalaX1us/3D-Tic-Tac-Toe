@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 import com.tictactoe.Game.GameManager;
 
-/**
- * Hello world!
- *
- */
 public class TicTacToe 
 {
     static Scanner sc = new Scanner(System.in);

@@ -21,7 +21,7 @@ public class Grid3D {
         for (int layer = 0; layer < gridSize; layer++) {
             for (int ligne = 0; ligne < gridSize; ligne++) {
                 for (int elem = 0; elem < gridSize; elem++) {
-                    this.grid[layer][ligne][elem] = new Cell(this.gridSize, (ligne*3)+(elem+1));
+                    this.grid[layer][ligne][elem] = new Cell(this.gridSize, (ligne*gridSize)+(elem+1));
                 }
             }
         }
@@ -66,7 +66,7 @@ public class Grid3D {
             System.out.println();
             if (ligne<gridSize-1) {
                 for (int l = 0; l < gridSize; l++) {
-                    for (int i = 0; i < cellLen*3+gridSize-1; i++) {
+                    for (int i = 0; i < cellLen*gridSize+gridSize-1; i++) {
                         System.out.print("-"); 
                     }
                     if (l<gridSize-1) {
