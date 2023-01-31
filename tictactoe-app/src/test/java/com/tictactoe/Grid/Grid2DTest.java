@@ -1,17 +1,11 @@
-package com.tictactoe.app;
+package com.tictactoe.Grid;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
+public class Grid2DTest {
+    
     @Test
     public void shouldAnswerWithTrue()
     {
