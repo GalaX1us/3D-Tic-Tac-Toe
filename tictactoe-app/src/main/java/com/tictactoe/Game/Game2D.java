@@ -1,11 +1,10 @@
-package Game;
+package com.tictactoe.Game;
 
-import Player.Human;
-import Player.Player;
-import Game.Cell;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;  // Import the Scanner class
+
+import com.tictactoe.Grid.Grid2D;
+import com.tictactoe.Player.Human;
+import com.tictactoe.Player.Player;
 
 
 
@@ -31,25 +30,25 @@ public class Game2D extends Game{
         String rawCoords;
         Boolean valid = false;
         do{
-            rawCoords = currentPlayer.askCoords();
+            rawCoords = currentPlayer.askCoords("Entrez le numéro de la case que vous voulez jouer");
             if (rawCoords.compareTo("")==0) continue;
             try{
                 coords = Integer.parseInt(rawCoords);
                 if (coords < 1 || coords > this.grid.getGridSize()*this.grid.getGridSize()) {
-                    System.out.println("Veuillez entrer un nombre entre 1 et "+this.grid.getGridSize()*this.grid.getGridSize());
+                    System.out.println("\nErreur : Veuillez entrer un nombre entre 1 et "+this.grid.getGridSize()*this.grid.getGridSize()+"\n");
                 }else if(!this.grid.isCellFree(coords)){
-                    System.out.println("Veuillez jouer sur une case libre");    
+                    System.out.println("\nErreur : Veuillez jouer sur une case libre\n");    
                 }else{
                     valid = true;
                 }
 
             }catch(Exception e){
-                System.out.println("Veuillez entrer un nombre valide");
+                System.out.println("\nErreur : Veuillez entrer un nombre valide\n");
             }
 
         }while(!valid);
 
-        return coords;
+        return coords-1;
     }
 
     public boolean validationInput(int coup)
@@ -59,18 +58,18 @@ public class Game2D extends Game{
         Boolean valid = false;
 
         do{
-            rawValidation = currentPlayer.askValidation(Integer.toString(coup));
+            rawValidation = currentPlayer.askValidation(Integer.toString(coup+1));
             try{
                 validation = Integer.parseInt(rawValidation);
                 if (validation < 1 || validation > 2) {
-                    System.out.println("Veuillez entrer un nombre entre 1 et 2");
+                    System.out.println("\nErreur : Veuillez entrer un nombre entre 1 et 2\n");
                 }
                 else{
                     valid = true;
                 }
             }
             catch(Exception e){
-                System.out.println("Veuillez entrer un nombre");
+                System.out.println("\nErreur : Veuillez entrer un nombre valide\n");
             }
         }while(!valid);
 
@@ -80,20 +79,20 @@ public class Game2D extends Game{
 
     public void makeMove(int cellNumber){ // joue et change de joueur
         
-        int line = (cellNumber-1)/this.grid.getGridSize();
-        int column = (cellNumber-1)%this.grid.getGridSize();
+        int line = (cellNumber)/this.grid.getGridSize();
+        int column = (cellNumber)%this.grid.getGridSize();
 
         this.grid.setSymbol( cellNumber, currentPlayer.getSymbol());
 
             if (this.grid.winningMove(line, column, currentPlayer.getSymbol())) {
                 this.grid.displayGrid();
                 System.out.println("Victoire de "+currentPlayer.getName());
-                this.grid.isOver = true;
+                this.grid.setOver();
             }
             else if (this.grid.isFull()) {
                 this.grid.displayGrid();
                 System.out.println("Match nul");
-                this.grid.isOver = true;
+                this.grid.setOver();
             }
             else{
                 if (this.currentPlayer == this.player1) {
@@ -109,7 +108,7 @@ public class Game2D extends Game{
     @Override
     public void play() {
         this.scanner.nextLine();
-        while (!this.grid.isOver) {
+        while (!this.grid.isOver()) {
 
             int coords; 
             boolean valid = false;

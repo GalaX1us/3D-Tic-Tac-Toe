@@ -1,4 +1,4 @@
-package Player;
+package com.tictactoe.Player;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public abstract class Player {
     protected char symbol;
     protected Scanner scanner;
 
-    public abstract String askCoords();
+    public abstract String askCoords(String message);
 
     public abstract String askValidation(String coup);
 

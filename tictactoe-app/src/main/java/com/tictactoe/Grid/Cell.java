@@ -1,4 +1,4 @@
-package Game;
+package com.tictactoe.Grid;
 
 public class Cell {
     private int index;
@@ -50,30 +50,20 @@ public class Cell {
         String s = str;
         int strSize = str.length();
 
-        if (strSize >= maxStrSize)
-        {
+        if (strSize >= maxStrSize){
             return str;
         }
         
-        for (int i = strSize; i < maxStrSize; i++)
-        {   
-            if (i%2 == 0)
-            {
+        for (int i = strSize; i < maxStrSize; i++){   
+            if (i%2 == 0){
                 s = s+" ";
             }
-            else
-            {
+            else{
                 s = " "+s;
             }
         }
         return s;
 
-    }
-    public int getIndex() {
-        return index;
-    }
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public Boolean isPlayed() {
@@ -88,12 +78,10 @@ public class Cell {
     }
 
     public char getSymbol() {
-        if (this.isPlayed())
-        {
+        if (this.isPlayed()){
             return symbol;
         }
-        else 
-        {
+        else{
             return (char) index; 
         }
         
@@ -106,10 +94,5 @@ public class Cell {
     }
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
-    }
-
-    public int getLength(){
-        return this.maxStrSize;
-    }
-   
+    }   
 }

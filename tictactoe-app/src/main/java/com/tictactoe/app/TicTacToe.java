@@ -2,7 +2,7 @@ package com.tictactoe.app;
 
 import java.util.Scanner;
 
-import Game.GameManager;
+import com.tictactoe.Game.GameManager;
 
 /**
  * Hello world!

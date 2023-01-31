@@ -1,16 +1,19 @@
-package Game;
+package com.tictactoe.Grid;
 
 public class Grid2D {
 
     private int gridSize;
     private Cell[][] grid;
-    public boolean isOver;
+    private boolean over;
+
+    private int occupiedCells;
 
     public Grid2D(int gridSize) {
         this.gridSize = gridSize;
         this.grid = new Cell[gridSize][gridSize];
         this.initGrid();
-        this.isOver = false;
+        this.over = false;
+        this.occupiedCells = 0;
     }
 
     private void initGrid(){
@@ -19,6 +22,14 @@ public class Grid2D {
                 this.grid[line][column] = new Cell(this.gridSize , line*this.gridSize+column+1);
         }
     }
+    }
+
+    public Boolean isOver(){
+        return this.over;
+    }
+
+    public void setOver(){
+        this.over = true;
     }
 
     public Boolean isCellFree(int index){
@@ -53,14 +64,7 @@ public class Grid2D {
 
     public boolean isFull()
     {
-        for (int line = 0; line < this.gridSize; line++) {
-            for (int column = 0; column < this.gridSize; column++) {
-                if (!this.grid[line][column].isPlayed()) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return this.occupiedCells == this.gridSize*this.gridSize;
     }
 
     public boolean winningMove(int line, int column, char symbol)
@@ -153,7 +157,7 @@ public class Grid2D {
         }
         if (full) {
             System.out.println("Egalité");
-            this.isOver = true;
+            this.over = true;
             return false; 
         }
 
@@ -163,15 +167,15 @@ public class Grid2D {
 
     public void selectCase (int index)
     {
-        int line = (index-1)/this.gridSize;
-        int column = (index-1)%this.gridSize;
+        int line = (index)/this.gridSize;
+        int column = (index)%this.gridSize;
         this.grid[line][column].setIsSelected(true);
     }
 
     public void unselectCase (int index)
     {
-        int line = (index-1)/this.gridSize;
-        int column = (index-1)%this.gridSize;
+        int line = (index)/this.gridSize;
+        int column = (index)%this.gridSize;
         this.grid[line][column].setIsSelected(false);
     }
 
@@ -182,16 +186,13 @@ public class Grid2D {
         return gridSize;
     }
 
-    public boolean getIsOver() {
-        return isOver;
-    }
-
     public void setSymbol(int index, char symbol)
     {
-        int line = (index-1)/this.gridSize;
-        int column = (index-1)%this.gridSize;
+        int line = (index)/this.gridSize;
+        int column = (index)%this.gridSize;
         this.grid[line][column].setSymbol(symbol);
         this.grid[line][column].setIsPlayed(true);
+        this.occupiedCells += 1;
     }
 
 

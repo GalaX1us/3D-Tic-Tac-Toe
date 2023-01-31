@@ -1,8 +1,8 @@
-package Game;
+package com.tictactoe.Game;
 
 import java.util.Scanner;
 
-import Player.Player;
+import com.tictactoe.Player.Player;
 
 public abstract class Game {
     public Player player1;
