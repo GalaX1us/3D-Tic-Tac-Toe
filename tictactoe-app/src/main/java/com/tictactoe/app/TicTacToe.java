@@ -1,19 +1,19 @@
 package com.tictactoe.app;
 
-import Game.Game;
-import Game.Game3D;
-import Game.Game2D;
+import java.util.Scanner;
+
 import Game.GameManager;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class TicTacToe 
 {
+    static Scanner sc = new Scanner(System.in);
     public static void main( String[] args )
     {
-        GameManager manage = new GameManager();
+        GameManager manage = new GameManager(sc);
         manage.start();
     }
 }

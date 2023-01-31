@@ -19,25 +19,29 @@ public class Grid2D {
                 this.grid[line][column] = new Cell(this.gridSize , line*this.gridSize+column+1);
         }
     }
-}
+    }
 
-    public Cell[][]getGrid() {
-        return grid;
+    public Boolean isCellFree(int index){
+        int line = (index-1)/this.gridSize;
+        int column = (index-1)%this.gridSize;
+        if (this.grid[line][column].isPlayed()) return false;
+
+        return true;
     }
 
     public void displayGrid(){
         for (int line = 0; line < this.gridSize; line++) {
             for (int column = 0; column < this.gridSize; column++) {
                 this.grid[line][column].displayCell();  
-                if (column<this.gridSize) {
+                if (column<this.gridSize-1) {
                     System.out.print("|"); 
                 }
             }
             System.out.println();
             if (line<this.gridSize-1) {
 
-                int nbMax = String.valueOf(this.gridSize*this.gridSize).length()+3; 
-                for (int i = 0; i < nbMax*this.gridSize; i++) {
+                int nbMax = String.valueOf(this.gridSize*this.gridSize).length()+2; 
+                for (int i = 0; i < nbMax*this.gridSize+(this.gridSize-1); i++) {
                     System.out.print("-"); 
                 }
                 System.out.println();
@@ -157,13 +161,13 @@ public class Grid2D {
 
     }
 
-
     public void selectCase (int index)
     {
         int line = (index-1)/this.gridSize;
         int column = (index-1)%this.gridSize;
         this.grid[line][column].setIsSelected(true);
     }
+
     public void unselectCase (int index)
     {
         int line = (index-1)/this.gridSize;

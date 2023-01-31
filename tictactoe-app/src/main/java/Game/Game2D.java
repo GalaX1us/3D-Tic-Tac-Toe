@@ -16,6 +16,14 @@ public class Game2D extends Game{
     public Grid2D grid;
     public Player currentPlayer;
 
+    public Game2D(int size, Scanner scanner) {
+        this.scanner = scanner;
+        this.player1 = new Human("James", 'X', scanner);
+        this.player2 = new Human("George", 'O', scanner);
+        this.currentPlayer = this.player1;
+        this.grid = new Grid2D(size);
+    }
+
     //verifier ce que l'on met en public ou private
 
     public int coordsInput(){
@@ -24,17 +32,19 @@ public class Game2D extends Game{
         Boolean valid = false;
         do{
             rawCoords = currentPlayer.askCoords();
+            if (rawCoords.compareTo("")==0) continue;
             try{
-                
                 coords = Integer.parseInt(rawCoords);
                 if (coords < 1 || coords > this.grid.getGridSize()*this.grid.getGridSize()) {
                     System.out.println("Veuillez entrer un nombre entre 1 et "+this.grid.getGridSize()*this.grid.getGridSize());
+                }else if(!this.grid.isCellFree(coords)){
+                    System.out.println("Veuillez jouer sur une case libre");    
                 }else{
                     valid = true;
                 }
 
-            }catch(InputMismatchException e){
-                System.out.println("Veuillez entrer un nombre");
+            }catch(Exception e){
+                System.out.println("Veuillez entrer un nombre valide");
             }
 
         }while(!valid);
@@ -48,40 +58,24 @@ public class Game2D extends Game{
         String rawValidation;
         Boolean valid = false;
 
-        do 
-        {
+        do{
             rawValidation = currentPlayer.askValidation(Integer.toString(coup));
-            try
-            {
+            try{
                 validation = Integer.parseInt(rawValidation);
-                if (validation < 1 || validation > 2) 
-                {
+                if (validation < 1 || validation > 2) {
                     System.out.println("Veuillez entrer un nombre entre 1 et 2");
                 }
-                else
-                {
+                else{
                     valid = true;
                 }
             }
-            catch(InputMismatchException e)
-            {
+            catch(Exception e){
                 System.out.println("Veuillez entrer un nombre");
             }
         }while(!valid);
 
         return (validation == 1); 
             
-    }
-
-
-
-
-    public Game2D(int size, Scanner scanner) {
-        this.scanner = scanner;
-        this.player1 = new Human("James", 'X', scanner);
-        this.player2 = new Human("George", 'O', scanner);
-        this.currentPlayer = this.player1;
-        this.grid = new Grid2D(size);
     }
 
     public void makeMove(int cellNumber){ // joue et change de joueur
@@ -91,13 +85,13 @@ public class Game2D extends Game{
 
         this.grid.setSymbol( cellNumber, currentPlayer.getSymbol());
 
-
-
             if (this.grid.winningMove(line, column, currentPlayer.getSymbol())) {
+                this.grid.displayGrid();
                 System.out.println("Victoire de "+currentPlayer.getName());
                 this.grid.isOver = true;
             }
             else if (this.grid.isFull()) {
+                this.grid.displayGrid();
                 System.out.println("Match nul");
                 this.grid.isOver = true;
             }
@@ -112,9 +106,9 @@ public class Game2D extends Game{
 
         }
 
-
     @Override
     public void play() {
+        this.scanner.nextLine();
         while (!this.grid.isOver) {
 
             int coords; 
@@ -124,13 +118,11 @@ public class Game2D extends Game{
                 this.grid.displayGrid();
                 coords = this.coordsInput();
                 this.grid.selectCase(coords);
+                this.grid.displayGrid();
                 valid = this.validationInput(coords);
+                this.grid.unselectCase(coords);
             } while (!valid);
             this.makeMove(coords);
-
-
-
-
         }
     }
 

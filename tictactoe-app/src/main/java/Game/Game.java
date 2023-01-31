@@ -10,7 +10,7 @@ public abstract class Game {
 
     public Player currentPlayer;
 
-    public Scanner scanner;
+    protected Scanner scanner;
 
     public abstract void play();
 }

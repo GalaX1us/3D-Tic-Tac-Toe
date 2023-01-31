@@ -36,7 +36,7 @@ public class Cell {
         if (isSelected) {
             str = ">"+str+"<";
         }
-        if (winningMove) {
+        else if (winningMove) {
             str = "["+str+"]";
         }
         else{
@@ -46,13 +46,11 @@ public class Cell {
         System.out.print(str);
     }
 
-    private String formatStr(String str)
-    
-    {
+    private String formatStr(String str){
         String s = str;
         int strSize = str.length();
 
-        if (strSize == maxStrSize)
+        if (strSize >= maxStrSize)
         {
             return str;
         }

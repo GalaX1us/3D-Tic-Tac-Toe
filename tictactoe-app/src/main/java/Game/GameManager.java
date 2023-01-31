@@ -5,9 +5,15 @@ import java.util.Scanner;
 public class GameManager{
 
     private Game game;
+    private Scanner sc;
 
-    private int askGameMode(Scanner scanner){
-        int gamemode;
+    
+
+    public GameManager(Scanner sc) {
+        this.sc = sc;
+    }
+    private int askGameMode(){
+        int gamemode = -1;
         Boolean flag = false;
         do {
             if (flag){
@@ -17,22 +23,19 @@ public class GameManager{
                 flag=true;
             }
             System.out.print(">");
-        
-            gamemode = scanner.nextInt();
-            
+            gamemode = sc.nextInt();
+              
         } while (gamemode!=2 && gamemode!=3);
 
         return gamemode;
     }
     public void start(){
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        int gamemode = this.askGameMode(scanner);
+        int gamemode = this.askGameMode();
         if (gamemode==2){
-            game = new Game2D(3, scanner);
+            game = new Game2D(4, sc);
         }else{
-            game = new Game3D(3, scanner);
+            game = new Game3D(3, sc);
         }
         game.play();
-        scanner.close();
     }
 }
