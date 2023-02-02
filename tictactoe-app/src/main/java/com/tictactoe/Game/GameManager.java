@@ -1,15 +1,31 @@
 package com.tictactoe.Game;
 
 import java.util.Scanner;
-
+/**
+ * Classe pour le game manager qui sert à lancer le jeu avec les bonnes options
+ */
 public class GameManager{
 
+    /**
+     * Game qui sera lancé
+     */
     private Game game;
+    /**
+     * Scanner pour la saisie
+     */
     private Scanner sc;
 
+    /**
+     * Constructeur de la classe GameManager
+     * @param sc Scanner pour la saisie
+     */
     public GameManager(Scanner sc) {
         this.sc = sc;
     }
+    /**
+     * Methode pour demander le mode de jeu
+     * @return le mode de jeu (2 ou 3)
+     */
     private int askGameMode(){
         int gamemode = -1;
         Boolean flag = false;
@@ -27,6 +43,10 @@ public class GameManager{
 
         return gamemode;
     }
+    /**
+     * Methode pour demander la taille de la grille
+     * @return la taille de la grille
+     */
     private int askSize(){
         int size = -1;
         Boolean flag = false;
@@ -44,6 +64,9 @@ public class GameManager{
 
         return size;
     }
+    /**
+     * Methode pour lancer le jeu
+     */
     public void start(){
         int gamemode = this.askGameMode();
         int size = this.askSize();

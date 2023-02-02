@@ -6,14 +6,33 @@ import com.tictactoe.Grid.Grid3D;
 import com.tictactoe.Player.Human;
 import com.tictactoe.Player.Player;
 
+/**
+ * Classe pour le jeu en 3D
+ */
 public class Game3D extends Game {
+    /*
+     * premier joueur
+     */
     public Player player1;
+    /*
+     * deuxieme joueur
+     */
     public Player player2;
-
+    /*
+     * joueur actuel
+     */
     public Player currentPlayer;
-
+    /*
+     * grille de jeu
+     */
     private Grid3D grid;
 
+    /**
+     * Constructeur de la classe Game3D
+     * 
+     * @param size    taille de la grille
+     * @param scanner scanner pour la saisie
+     */
     public Game3D(int size, Scanner scanner) {
         this.scanner = scanner;
         this.player1 = new Human("James", 'X', scanner);
@@ -22,6 +41,9 @@ public class Game3D extends Game {
         this.grid = new Grid3D(size);
     }
     
+    /**
+     * Methode pour jouer demander des coordonnées
+     */
     @Override
     public void play() {
         this.scanner.nextLine();
@@ -42,6 +64,12 @@ public class Game3D extends Game {
         }
     }
 
+    /**
+     * Methode pour jouer un coup
+     * 
+     * @param layer     couche
+     * @param cellNumber numéro de la case dans la couche
+     */
     public void makeMove(int layer, int cellNumber){ // joue et change de joueur
         
         int line = (cellNumber)/this.grid.getGridSize();
@@ -69,7 +97,12 @@ public class Game3D extends Game {
             }
 
         }
-
+    
+    /**
+     * Methode pour demander des coordonnées
+     * 
+     * @return tableau de coordonnées
+     */
     public int[] coordsInput(){
         int[] coords = {-1,-1}; 
         int layer = -1, coord = -1;
@@ -107,6 +140,13 @@ public class Game3D extends Game {
         return coords;
     }
 
+    /**
+     * Methode pour demander une validation
+     * 
+     * @param layer couche
+     * @param coord numéro de la case dans la couche
+     * @return vrai si la case est valide
+     */
     public boolean validationInput(int layer, int coord)
     {
         int validation = 0;
