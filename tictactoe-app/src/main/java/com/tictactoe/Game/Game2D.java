@@ -14,19 +14,19 @@ public class Game2D extends Game{
     /**
      * premier joueur
      */
-    public Human player1; 
+    private Human player1; 
     /**
      * deuxieme joueur
      */
-    public Human player2;
+    private Human player2;
     /**
      * grille de jeu
      */
-    public Grid2D grid;
+    private Grid2D grid;
     /**
      * joueur courant
      */
-    public Player currentPlayer;
+    private Player currentPlayer;
 
     /**
      * Constructeur de la classe Game2D
@@ -40,6 +40,28 @@ public class Game2D extends Game{
         this.currentPlayer = this.player1;
         this.grid = new Grid2D(size);
     }
+
+    
+    /**
+     * Methode pour récupérer la grille de jeu
+     * 
+     * @return grille de jeu
+     */
+    public Grid2D getGrid() {
+        return grid;
+    }
+
+
+    /**
+     * Methode pour récupérer le joueur actuel
+     * 
+     * @return le joueur actuel
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+
 
     /**
      * Methode pour jouer demander des coordonnées

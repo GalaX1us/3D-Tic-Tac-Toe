@@ -177,6 +177,17 @@ public class Grid3D {
     }
 
     /**
+     * Renvoie la cellule aux coords spécifiées
+     * @param layer indice de la couche
+     * @param line indice de la ligne
+     * @param column indice de la colonne
+     * @return la cellule correspondante
+     */
+    public Cell getCell(int layer, int line, int column){
+        return this.grid[layer][line][column];
+    }
+
+    /**
      * Methode pour savoir si un coup est gagnant
      * @param layer la couche de la cellule
      * @param line la ligne de la cellule
@@ -288,12 +299,12 @@ public class Grid3D {
         int w = 0;
                         
         for(int j = 0; j<this.gridSize ; j++) {   
-            if(this.grid[layer][this.gridSize-1-j][this.gridSize-1-j].getSymbol() == symbol)
+            if(this.grid[layer][j][this.gridSize-1-j].getSymbol() == symbol)
                 w++; 
         }
         if (w==this.gridSize){
             for(int j = 0; j<this.gridSize ; j++) {   
-                this.grid[layer][this.gridSize-1-j][this.gridSize-1-j].setWinning();
+                this.grid[layer][j][this.gridSize-1-j].setWinning();
             }
             return true;
         }

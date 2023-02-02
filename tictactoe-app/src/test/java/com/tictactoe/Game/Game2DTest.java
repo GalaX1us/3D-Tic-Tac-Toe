@@ -2,82 +2,36 @@ package com.tictactoe.Game;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Scanner;
+
 import org.junit.Test;
 
 public class Game2DTest {
 
-    private Game2D game;
+    static private Scanner sc = new Scanner(System.in);
 
-    // pour taille 3x3 
-    public void testRegression() // pour verifier si ça détecte bien quand on gagne 
+    @Test
+    public void testInsertionGrille()
     {
-        // Test 1 
-        game.grid.displayGrid();
-        game.makeMove(1);
-        game.makeMove(4);
-        game.makeMove(2);
-        game.makeMove(5);
-        game.makeMove(3);
 
-        game.grid.displayGrid();
+        Game2D g = new Game2D(3, sc);
+
+        g.makeMove(0);
+        g.makeMove(5);
+
+        assertTrue(Character.compare(g.getGrid().getCell(0,0).getSymbol(), g.getCurrentPlayer().getSymbol())==0);
     }
 
-    public void testRegression2()// test regression pour tester les combinaisons gagnantes verticales 
+    @Test
+    public void testFinPartie()
     {
 
-        game.grid.displayGrid();
-        game.makeMove(1);
-        game.makeMove(2);
-        game.makeMove(4);
-        game.makeMove(5);
-        game.makeMove(7);
+        Game2D g = new Game2D(3, sc);
 
-        game.grid.displayGrid();
-    }
-
-    public void testRegression3()// test regression pour tester les combinaisons gagnantes diagonales 
-    {
-
-        game.grid.displayGrid();
-        game.makeMove(1);
-        game.makeMove(2);
-        game.makeMove(5);
-        game.makeMove(4);
-        game.makeMove(9);
-
-        game.grid.displayGrid();
-    }
-    public void testRegression4()// test regression pour tester les combinaisons gagnantes diagonale2  
-    {
-
-        game.grid.displayGrid();
-        game.makeMove(3);
-        game.makeMove(2);
-        game.makeMove(5);
-        game.makeMove(4);
-        game.makeMove(7);
-
-        game.grid.displayGrid();
-    }
-
-    //  taille gridSize
-    public void testRegression5()
-    {
-        for (int i = 1; i <= game.grid.getGridSize(); i++) {
-            game.makeMove(i);
-            if (i < game.grid.getGridSize())
-            {
-                game.makeMove(i+game.grid.getGridSize());
-            }
-            
-
+        for (int i = 0; i < g.getGrid().getGridSize()*g.getGrid().getGridSize(); i++) {
+            g.makeMove(i);
         }
-        game.grid.displayGrid();
+
+        assertTrue(g.getGrid().isOver());
     }
-
-
-
-
-
-   
 }

@@ -51,7 +51,15 @@ public class Cell {
         this(size);
         this.index = index;
     }
-    
+
+    /**
+     * 
+     * @return si la cellule est gagnante
+     */
+    public Boolean getWinningMove() {
+        return winningMove;
+    }
+
     /**
      * Methode pour afficher la cellule
      */
@@ -80,7 +88,7 @@ public class Cell {
      * @param str chaine de caractère à formater
      * @return chaine de caractère formatée
      */
-    private String formatStr(String str){
+    public String formatStr(String str){
         String s = str;
         int strSize = str.length();
 
@@ -128,13 +136,7 @@ public class Cell {
      * @return
      */
     public char getSymbol() {
-        if (this.isPlayed()){
-            return symbol;
-        }
-        else{
-            return (char) index; 
-        }
-        
+        return symbol; 
     }
     /**
      * setter de l'attribut symbol

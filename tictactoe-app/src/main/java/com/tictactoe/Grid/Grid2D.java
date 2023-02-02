@@ -73,6 +73,16 @@ public class Grid2D {
     }
 
     /**
+     * Renvoie la cellule aux coords spécifiées
+     * @param line indice
+     * @param column indice
+     * @return la cellule correspondante
+     */
+    public Cell getCell(int line, int column){
+        return this.grid[line][column];
+    }
+
+    /**
      * Méthode pour afficher la grille
      */
     public void displayGrid(){

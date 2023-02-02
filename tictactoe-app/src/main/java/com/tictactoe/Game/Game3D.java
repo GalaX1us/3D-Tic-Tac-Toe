@@ -13,15 +13,15 @@ public class Game3D extends Game {
     /*
      * premier joueur
      */
-    public Player player1;
+    private Player player1;
     /*
      * deuxieme joueur
      */
-    public Player player2;
+    private Player player2;
     /*
      * joueur actuel
      */
-    public Player currentPlayer;
+    private Player currentPlayer;
     /*
      * grille de jeu
      */
@@ -40,7 +40,26 @@ public class Game3D extends Game {
         this.currentPlayer = this.player1;
         this.grid = new Grid3D(size);
     }
+
     
+    /**
+     * Methode pour récupérer la grille de jeu
+     * 
+     * @return grille de jeu
+     */
+    public Grid3D getGrid() {
+        return grid;
+    }
+
+    /**
+     * Methode pour récupérer le joueur actuel
+     * 
+     * @return le joueur actuel
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     /**
      * Methode pour jouer et demander des coordonnées
      */
