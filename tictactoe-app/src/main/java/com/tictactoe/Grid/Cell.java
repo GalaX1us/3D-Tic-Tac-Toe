@@ -1,5 +1,7 @@
 package com.tictactoe.Grid;
-
+/**
+ * classe pour la cellule de la grille "
+ */
 public class Cell {
     /**
      * index de la cellule
@@ -12,7 +14,7 @@ public class Cell {
     /**
      * booleen pour savoir si la cellule est jouée
      */
-    private Boolean isPlayed
+    private Boolean isPlayed;
     /**
      * booleen pour savoir si la cellule est selectionnée
      */
