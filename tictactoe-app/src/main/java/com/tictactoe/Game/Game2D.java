@@ -4,8 +4,6 @@ import java.util.Scanner;  // Import the Scanner class
 
 import com.tictactoe.Grid.Grid2D;
 import com.tictactoe.Player.Human;
-import com.tictactoe.Player.Player;
-
 
 /**
  * Classe pour le jeu en 2D
