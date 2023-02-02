@@ -1,14 +1,32 @@
 package com.tictactoe.Grid;
-
+/**
+ * classe pour la grille de jeu en 3D
+ */
 public class Grid3D {
-
+    /**
+     * taille de la grille
+     */
     private int gridSize;
+
+    /**
+     * tableau de cellules
+     */
     private Cell[][][] grid;
 
+    /**
+     * booleen pour savoir si la partie est finie
+     */
     private Boolean over;
 
+    /**
+     * nombre de cellules occupées
+     */
     private int occupiedCells;
 
+    /**
+     * Constructeur de la classe Grid3D
+     * @param gridSize taille de la grille
+     */
     public Grid3D(int gridSize) {
         this.gridSize = gridSize;
         this.grid = new Cell[gridSize][gridSize][gridSize];
@@ -17,6 +35,9 @@ public class Grid3D {
         this.occupiedCells = 0;
     }
 
+    /**
+     * Methode pour initialiser la grille
+     */
     private void initGrid(){
         for (int layer = 0; layer < gridSize; layer++) {
             for (int ligne = 0; ligne < gridSize; ligne++) {
@@ -27,18 +48,33 @@ public class Grid3D {
         }
     }
 
+    /** 
+     * Methode qui revoie le booleen over
+    */
     public Boolean isOver(){
         return this.over;
     }
 
+    /**
+     * setter pour le booleen over
+     */
     public void setOver(){
         this.over = true;
     }
 
+    /**
+     * getter de la taille de la grille
+     * @return la taille de la grille
+     */
     public int getGridSize() {
         return this.gridSize;
     }
-
+    
+    /**
+     *  Methode pour savoir si la cellule est libre
+     * @param layer la couche de la cellule
+     * @param index l'index de la cellule
+     */
     public Boolean isCellFree(int layer, int index){
         int line = (index)/this.gridSize;
         int column = (index)%this.gridSize;
@@ -47,6 +83,9 @@ public class Grid3D {
         return true;
     }
 
+    /**
+     * Methode pour afficher la grille
+     */
     public void displayGrid(){
         int cellLen = String.valueOf(this.gridSize*this.gridSize).length()+2;
 
@@ -92,6 +131,11 @@ public class Grid3D {
         System.out.println();
     }
 
+    /**
+     * Methode pour selectionner une cellule
+     * @param layer la couche de la cellule
+     * @param index l'index de la cellule
+     */
     public void selectCase(int layer, int index)
     {
         int line = (index)/this.gridSize;
@@ -99,6 +143,11 @@ public class Grid3D {
         this.grid[layer][line][column].setIsSelected(true);
     }
 
+    /**
+     * Methode pour deselectionner une cellule
+     * @param layer la couche de la cellule
+     * @param index l'index de la cellule
+     */
     public void unselectCase(int layer, int index)
     {
         int line = (index)/this.gridSize;
@@ -106,17 +155,35 @@ public class Grid3D {
         this.grid[layer][line][column].setIsSelected(false);
     }
 
+    /**
+     * Methode pour jouer un coup
+     * @param layer la couche de la cellule
+     * @param index l'index de la cellule
+     * @param symbol le symbole du joueur
+     */
     public void setSymbol(int layer, int line, int column, char symbol)
     {
         this.grid[layer][line][column].setSymbol(symbol);
         this.grid[layer][line][column].setIsPlayed(true);
         this.occupiedCells += 1;
     }
-    
+
+    /**
+     * Methode pour savoir si la grille est pleine
+     * @return un booleen qui indique si la grille est pleine
+     */
     public Boolean isFull(){
         return this.occupiedCells == this.gridSize*this.gridSize*this.gridSize;
     }
 
+    /**
+     * Methode pour savoir si un coup est gagnant
+     * @param layer la couche de la cellule
+     * @param line la ligne de la cellule
+     * @param column la colonne de la cellule
+     * @param symbol le symbole du joueur
+     * @return un booleen qui indique si le joueur a gagné
+     */
     public Boolean winningMove(int layer, int line, int column, char symbol) {
         Boolean value = CHECK_HORIZONTALLY(layer, line, column, symbol) ||
                     CHECK_VERTICALLY(layer, line, column, symbol) ||
@@ -134,6 +201,14 @@ public class Grid3D {
         return value;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant horizontalement
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant horizontalement
+     */
     private Boolean CHECK_HORIZONTALLY (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -151,6 +226,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant verticalement
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant verticalement
+     */
     private Boolean CHECK_VERTICALLY (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -168,6 +251,14 @@ public class Grid3D {
         return false;
     }
    
+    /**
+     * Methode pour verifier si le coup est gagnant diagonalement de gauche à droite
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant diagonalement
+     */
     private Boolean CHECK_DIAGONALLY_LR (int layer, int line, int column, char symbol) {
         int w = 0;
                         
@@ -184,6 +275,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant diagonalement de droite à gauche
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant diagonalement
+     */
     private Boolean CHECK_DIAGONALLY_RL (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -201,6 +300,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une couche
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une couche
+     */
     private Boolean CHECK_ACROSS_SAME_POSITION (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -218,6 +325,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une ligne de gauche à droite
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une ligne
+     */
     private Boolean CHECK_ACROSS_HORIZONTALLY_LR (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -235,6 +350,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une ligne de droite à gauche
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une ligne
+     */
     private Boolean CHECK_ACROSS_HORIZONTALLY_RL (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -252,6 +375,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une colonne de haut en bas
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une colonne
+     */
     private Boolean CHECK_ACROSS_VERTICALLY_UD (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -268,7 +399,14 @@ public class Grid3D {
         }
         return false;
     }
-    
+    /**
+     * Methode pour verifier si le coup est gagnant sur une colonne de bas en haut
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une colonne
+     */
     private Boolean CHECK_ACROSS_VERTICALLY_DU (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -286,6 +424,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une diagonale de haut en bas de gauche à droite
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une diagonale
+     */
     private Boolean CHECK_ACROSS_DIAGONALLY_LR_UD (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -303,6 +449,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une diagonale de gauche à droite de bas en haut
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une diagonale
+     */
     private Boolean CHECK_ACROSS_DIAGONALLY_LR_DU (int layer, int line, int column, char symbol) {
         
         int w = 0;
@@ -319,7 +473,14 @@ public class Grid3D {
         }
         return false;
     }
-    
+    /**
+     * Methode pour verifier si le coup est gagnant sur une diagonale de haut en bas de droite à gauche
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une diagonale
+     */
     private Boolean CHECK_ACROSS_DIAGONALLY_RL_UD (int layer, int line, int column, char symbol) {
         int w = 0;
                         
@@ -336,6 +497,14 @@ public class Grid3D {
         return false;
     }
     
+    /**
+     * Methode pour verifier si le coup est gagnant sur une diagonale de droite à gauche de bas en haut
+     * @param layer la couche de la cellule jouée
+     * @param line la ligne de la cellule jouée
+     * @param column la colonne de la cellule jouée
+     * @param symbol le symbole du joueur ayant joué
+     * @return un booleen qui indique si le coup est gagnant sur une diagonale
+     */
     private Boolean CHECK_ACROSS_DIAGONALLY_RL_DU (int layer, int line, int column, char symbol) {
         
      int w = 0;
