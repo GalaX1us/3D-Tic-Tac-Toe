@@ -42,7 +42,7 @@ public class Game3D extends Game {
     }
     
     /**
-     * Methode pour jouer demander des coordonnées
+     * Methode pour jouer et demander des coordonnées
      */
     @Override
     public void play() {
@@ -116,7 +116,7 @@ public class Game3D extends Game {
                 continue;
             }
             try{
-                layer = rawCoords.charAt(0) - 'a' + 1;
+                layer = Character.toLowerCase(rawCoords.charAt(0)) - 'a' + 1;
                 coord = Integer.parseInt(rawCoords.substring(1));
 
                 if(layer < 1 || layer > this.grid.getGridSize()){
