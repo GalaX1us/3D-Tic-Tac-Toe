@@ -11,23 +11,9 @@ import com.tictactoe.Player.Player;
  * Classe pour le jeu en 2D
  */
 public class Game2D extends Game{
-    /**
-     * premier joueur
-     */
-    private Human player1; 
-    /**
-     * deuxieme joueur
-     */
-    private Human player2;
-    /**
-     * grille de jeu
-     */
-    private Grid2D grid;
-    /**
-     * joueur courant
-     */
-    private Player currentPlayer;
 
+    private Grid2D grid;
+    
     /**
      * Constructeur de la classe Game2D
      * @param size taille de la grille
@@ -50,18 +36,6 @@ public class Game2D extends Game{
     public Grid2D getGrid() {
         return grid;
     }
-
-
-    /**
-     * Methode pour récupérer le joueur actuel
-     * 
-     * @return le joueur actuel
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-
 
     /**
      * Methode pour jouer demander des coordonnées

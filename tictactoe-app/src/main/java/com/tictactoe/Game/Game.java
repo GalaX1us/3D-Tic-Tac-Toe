@@ -12,15 +12,15 @@ public abstract class Game {
     /**
      * premier joueur
      */
-    public Player player1; 
+    protected Player player1; 
     /**
      * deuxieme joueur
      */
-    public Player player2;
+    protected Player player2;
     /**
      * joueur actuel
      */
-    public Player currentPlayer;
+    protected Player currentPlayer;
 
     /**
      * scanner pour la saisie
@@ -31,4 +31,13 @@ public abstract class Game {
      * Methode pour jouer
      */
     public abstract void play();
+
+    /**
+     * Methode pour récupérer le joueur actuel
+     * 
+     * @return le joueur actuel
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 }

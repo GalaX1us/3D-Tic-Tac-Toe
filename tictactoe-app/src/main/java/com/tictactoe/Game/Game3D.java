@@ -11,18 +11,6 @@ import com.tictactoe.Player.Player;
  */
 public class Game3D extends Game {
     /*
-     * premier joueur
-     */
-    private Player player1;
-    /*
-     * deuxieme joueur
-     */
-    private Player player2;
-    /*
-     * joueur actuel
-     */
-    private Player currentPlayer;
-    /*
      * grille de jeu
      */
     private Grid3D grid;
@@ -49,15 +37,6 @@ public class Game3D extends Game {
      */
     public Grid3D getGrid() {
         return grid;
-    }
-
-    /**
-     * Methode pour récupérer le joueur actuel
-     * 
-     * @return le joueur actuel
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
     }
 
     /**
