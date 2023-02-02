@@ -1,13 +1,31 @@
 package com.tictactoe.Grid;
 
+/**
+ * classe pour la grille de jeu en 2D
+ */
 public class Grid2D {
 
+    /**
+     * taille de la grille
+     */
     private int gridSize;
+    /**
+     * tableau de cellules
+     */
     private Cell[][] grid;
+    /**
+     * booleen pour savoir si la partie est finie
+     */
     private boolean over;
-
+    /**
+     * nombre de cellules occupées
+     */
     private int occupiedCells;
 
+    /**
+     * Constructeur de la classe Grid2D
+     * @param gridSize taille de la grille
+     */
     public Grid2D(int gridSize) {
         this.gridSize = gridSize;
         this.grid = new Cell[gridSize][gridSize];
@@ -16,22 +34,36 @@ public class Grid2D {
         this.occupiedCells = 0;
     }
 
+    /**
+     * Methode pour initialiser la grille
+     */
     private void initGrid(){
         for (int line = 0; line < this.gridSize; line++) {
             for (int column = 0; column < this.gridSize; column++) {
                 this.grid[line][column] = new Cell(this.gridSize , line*this.gridSize+column+1);
+            }   
         }
     }
-    }
 
+    /** 
+     * Methode qui revoie le booleen over
+    */
     public Boolean isOver(){
         return this.over;
     }
 
+    /**
+     * setter pour le booleen over
+     */
     public void setOver(){
         this.over = true;
     }
 
+    /**
+     * 
+     * @param index
+     * @return si la cellule est libre
+     */
     public Boolean isCellFree(int index){
         int line = (index-1)/this.gridSize;
         int column = (index-1)%this.gridSize;
@@ -40,6 +72,9 @@ public class Grid2D {
         return true;
     }
 
+    /**
+     * Méthode pour afficher la grille
+     */
     public void displayGrid(){
         for (int line = 0; line < this.gridSize; line++) {
             for (int column = 0; column < this.gridSize; column++) {
@@ -62,11 +97,22 @@ public class Grid2D {
         System.out.println();
     }
 
+    /**
+     * Méthode pour verifier si la grille est pleine
+     * @return si la grille est pleine (boolean)
+     */
     public boolean isFull()
     {
         return this.occupiedCells == this.gridSize*this.gridSize;
     }
 
+    /**
+     * Méthode pour vérifier si un coup est gagnant
+     * @param line ligne du coup
+     * @param column colonne du coup
+     * @param symbol symbole du coup
+     * @return si le coup est gagnant (boolean)
+     */
     public boolean winningMove(int line, int column, char symbol)
     {
         boolean l = true;
@@ -165,6 +211,10 @@ public class Grid2D {
 
     }
 
+    /**
+     * Méthode pour mettre en evidence une classe 
+     * @param index emplacement de la case
+     */
     public void selectCase (int index)
     {
         int line = (index)/this.gridSize;
@@ -172,6 +222,10 @@ public class Grid2D {
         this.grid[line][column].setIsSelected(true);
     }
 
+    /**
+     * Méthode pour enlever l'évidence d'une classe
+     * @param index emplacement de la case
+     */
     public void unselectCase (int index)
     {
         int line = (index)/this.gridSize;
@@ -180,12 +234,16 @@ public class Grid2D {
     }
 
 
-    // setter and getter
-
+    /**
+     * @return the gridSize
+     */
     public int getGridSize() {
         return gridSize;
     }
 
+    /**
+     * @param gridSize the gridSize to set
+     */
     public void setSymbol(int index, char symbol)
     {
         int line = (index)/this.gridSize;
@@ -194,15 +252,5 @@ public class Grid2D {
         this.grid[line][column].setIsPlayed(true);
         this.occupiedCells += 1;
     }
-
-
-
-
-
-
-
-
-
-
     
 }

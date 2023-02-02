@@ -7,14 +7,32 @@ import com.tictactoe.Player.Human;
 import com.tictactoe.Player.Player;
 
 
-
+/**
+ * Classe pour le jeu en 2D
+ */
 public class Game2D extends Game{
-
-    public Human player1;
+    /**
+     * premier joueur
+     */
+    public Human player1; 
+    /**
+     * deuxieme joueur
+     */
     public Human player2;
+    /**
+     * grille de jeu
+     */
     public Grid2D grid;
+    /**
+     * joueur courant
+     */
     public Player currentPlayer;
 
+    /**
+     * Constructeur de la classe Game2D
+     * @param size taille de la grille
+     * @param scanner scanner pour la saisie
+     */
     public Game2D(int size, Scanner scanner) {
         this.scanner = scanner;
         this.player1 = new Human("James", 'X', scanner);
@@ -23,8 +41,9 @@ public class Game2D extends Game{
         this.grid = new Grid2D(size);
     }
 
-    //verifier ce que l'on met en public ou private
-
+    /**
+     * Methode pour jouer demander des coordonnées
+     */
     public int coordsInput(){
         int coords = 0; 
         String rawCoords;
@@ -51,6 +70,11 @@ public class Game2D extends Game{
         return coords-1;
     }
 
+    /**
+     * Methode pour valider le coup
+     * @param coup coup à valider
+     * @return true si le coup est valide, false sinon
+     */
     public boolean validationInput(int coup)
     {
         int validation = 0;
@@ -76,7 +100,10 @@ public class Game2D extends Game{
         return (validation == 1); 
             
     }
-
+    /**
+     * Methode pour jouer un coup
+     * @param cellNumber numero de la case
+     */
     public void makeMove(int cellNumber){ // joue et change de joueur
         
         int line = (cellNumber)/this.grid.getGridSize();
@@ -104,7 +131,9 @@ public class Game2D extends Game{
             }
 
         }
-
+    /**
+     * Methode pour jouer
+     */
     @Override
     public void play() {
         this.scanner.nextLine();
@@ -124,90 +153,6 @@ public class Game2D extends Game{
             this.makeMove(coords);
         }
     }
-
-
-   
-
-    
-
-    
-
-   
-
-
-
-// pour taille 3x3 
-    public void testRegression() // pour verifier si ça détecte bien quand on gagne 
-    {
-        // Test 1 
-        this.grid.displayGrid();
-        this.makeMove(1);
-        this.makeMove(4);
-        this.makeMove(2);
-        this.makeMove(5);
-        this.makeMove(3);
-
-        this.grid.displayGrid();
-    }
-
-    public void testRegression2()// test regression pour tester les combinaisons gagnantes verticales 
-    {
-
-        this.grid.displayGrid();
-        this.makeMove(1);
-        this.makeMove(2);
-        this.makeMove(4);
-        this.makeMove(5);
-        this.makeMove(7);
-
-        this.grid.displayGrid();
-    }
-
-    public void testRegression3()// test regression pour tester les combinaisons gagnantes diagonales 
-    {
-
-        this.grid.displayGrid();
-        this.makeMove(1);
-        this.makeMove(2);
-        this.makeMove(5);
-        this.makeMove(4);
-        this.makeMove(9);
-
-        this.grid.displayGrid();
-    }
-    public void testRegression4()// test regression pour tester les combinaisons gagnantes diagonale2  
-    {
-
-        this.grid.displayGrid();
-        this.makeMove(3);
-        this.makeMove(2);
-        this.makeMove(5);
-        this.makeMove(4);
-        this.makeMove(7);
-
-        this.grid.displayGrid();
-    }
-
-    //  taille gridSize
-    public void testRegression5()
-    {
-        for (int i = 1; i <= this.grid.getGridSize(); i++) {
-            this.makeMove(i);
-            if (i < this.grid.getGridSize())
-            {
-                this.makeMove(i+this.grid.getGridSize());
-            }
-            
-
-        }
-        this.grid.displayGrid();
-    }
-
-
-
-
-
-   
 }
 
 

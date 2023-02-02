@@ -1,15 +1,35 @@
 package com.tictactoe.Grid;
 
 public class Cell {
+    /**
+     * index de la cellule
+     */
     private int index;
+    /**
+     * symbole de la cellule
+     */
     private char symbol;
-
-    private Boolean isPlayed;
+    /**
+     * booleen pour savoir si la cellule est jouée
+     */
+    private Boolean isPlayed
+    /**
+     * booleen pour savoir si la cellule est selectionnée
+     */
     private Boolean isSelected;
+    /**
+     * booleen pour savoir si la cellule est une combinaison gagnante
+     */
     private Boolean winningMove;
-
+    /**
+     * taille max de la chaine de caractère rentrée dans la cellule
+     */
     private int maxStrSize; 
 
+    /**
+     * Constructeur de la classe Cell
+     * @param size taille de la grille
+     */
     public Cell(int size) {
         this.index = 0;
         this.symbol = '-';
@@ -20,12 +40,19 @@ public class Cell {
         
     }
 
+    /**
+     * Constructeur de la classe Cell
+     * @param size taille de la grille
+     * @param index index de la cellule
+     */
     public Cell(int size, int index) {
         this(size);
         this.index = index;
     }
     
-
+    /**
+     * Methode pour afficher la cellule
+     */
     public void displayCell(){
         String str = "";
         if(isPlayed){
@@ -46,6 +73,11 @@ public class Cell {
         System.out.print(str);
     }
 
+    /**
+     * Methode pour formater la chaine de caractère
+     * @param str chaine de caractère à formater
+     * @return chaine de caractère formatée
+     */
     private String formatStr(String str){
         String s = str;
         int strSize = str.length();
@@ -66,17 +98,33 @@ public class Cell {
 
     }
 
+    /**
+     * Methode pour savoir si la cellule est jouée
+     * @return booleen pour savoir si la cellule est jouée
+     */
     public Boolean isPlayed() {
         return isPlayed;
     }
+    
+    /**
+     * setter de l'attribut isPlayed
+     * @param isPlayed
+     */
     public void setIsPlayed(Boolean isPlayed) {
         this.isPlayed = isPlayed;
     }
 
+    /**
+     * setter de l'attribut winningMove
+     */
     public void setWinning(){
         this.winningMove=true;
     }
 
+    /**
+     * getter de l'attribut symbol
+     * @return
+     */
     public char getSymbol() {
         if (this.isPlayed()){
             return symbol;
@@ -86,12 +134,24 @@ public class Cell {
         }
         
     }
+    /**
+     * setter de l'attribut symbol
+     * @param symbol
+     */
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
+    /**
+     * getter de l'attribut isSelected
+     * @return
+     */
     public Boolean getIsSelected() {
         return isSelected;
     }
+    /**
+     * setter de l'attribut isSelected
+     * @param isSelected
+     */
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
     }   
