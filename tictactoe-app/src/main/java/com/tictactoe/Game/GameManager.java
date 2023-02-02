@@ -37,8 +37,12 @@ public class GameManager{
                 flag=true;
             }
             System.out.print(">");
-            gamemode = sc.nextInt();
-              
+            if (sc.hasNextInt()) {
+                gamemode = sc.nextInt();
+            }else{
+                sc.nextLine();
+            }
+             
         } while (gamemode!=2 && gamemode!=3);
 
         return gamemode;
