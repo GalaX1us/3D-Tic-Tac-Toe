@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.tictactoe.Grid.Grid2DTest" time="0.001" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.tictactoe.Grid.Grid2DTest" time="0" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire/surefirebooter2659986255895704572.jar /home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire 2023-02-03T12-00-36_217-jvmRun1 surefire8742585086219267534tmp surefire_012948849371327941590tmp"/>
+    <property name="sun.java.command" value="/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire/surefirebooter13969648459367608945.jar /home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire 2023-02-03T18-41-18_099-jvmRun1 surefire2319516564294220401tmp surefire_014495137961616679980tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/test-classes:/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/classes:/home/galax1us/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/galax1us/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire/surefirebooter2659986255895704572.jar"/>
+    <property name="surefire.real.class.path" value="/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/surefire/surefirebooter13969648459367608945.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.5+8-Ubuntu-2ubuntu122.04"/>
     <property name="user.name" value="galax1us"/>
@@ -52,7 +52,7 @@
     <property name="java.class.version" value="61.0"/>
   </properties>
   <testcase name="testCombGagnanteHorizontale" classname="com.tictactoe.Grid.Grid2DTest" time="0"/>
-  <testcase name="testGrillePleine" classname="com.tictactoe.Grid.Grid2DTest" time="0.001"/>
+  <testcase name="testGrillePleine" classname="com.tictactoe.Grid.Grid2DTest" time="0"/>
   <testcase name="testCombGagnanteDiagonale2" classname="com.tictactoe.Grid.Grid2DTest" time="0"/>
   <testcase name="testCombGagnanteVerticale" classname="com.tictactoe.Grid.Grid2DTest" time="0"/>
   <testcase name="testCasesGagnante" classname="com.tictactoe.Grid.Grid2DTest" time="0"/>

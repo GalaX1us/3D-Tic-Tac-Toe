@@ -1,0 +1,24 @@
+-encoding
+'UTF-8'
+-protected
+-source
+'1.7'
+-sourcepath
+'/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'tictactoe-app 1.0.0 API'
+-linkoffline
+'https://docs.oracle.com/javase/7/docs/api' '/home/galax1us/Documents/Etude/3A/POO/APO/3D-Tic-Tac-Toe/tictactoe-app/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'tictactoe-app 1.0.0 API'
