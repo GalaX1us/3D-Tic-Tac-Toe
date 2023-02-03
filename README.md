@@ -1,5 +1,7 @@
 # 3D-Tic-Tac-Toe
 
+This project is a simple tic tac toe in which you can play either on a **2D grid** or on a **3D grid**.
+
 # How to run the Project
 
 First you need to setup **Maven** on your computer
