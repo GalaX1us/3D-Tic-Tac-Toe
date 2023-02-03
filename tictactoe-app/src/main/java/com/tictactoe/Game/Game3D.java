@@ -75,6 +75,7 @@ public class Game3D extends Game {
                 else{
                     this.currentPlayer = this.player1;
                 }
+                System.out.println();
             }
         }
     }

@@ -147,6 +147,7 @@ public class Game2D extends Game{
                 else{
                     this.currentPlayer = this.player1;
                 }
+                System.out.println();
             }
         }
     }
