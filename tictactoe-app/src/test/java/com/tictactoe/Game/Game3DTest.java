@@ -23,17 +23,14 @@ public class Game3DTest {
     }
 
     @Test
-    public void testFinPartie()
+    public void testMakeMove()
     {
 
         Game3D g = new Game3D(3, sc);
 
-        for(int i = 0; i < g.getGrid().getGridSize(); i++){
-            for (int j = 0; j < g.getGrid().getGridSize()*g.getGrid().getGridSize(); j++) {
-                g.makeMove(i,j);
-            }
-        }
+        g.makeMove(0, 0);
+        g.makeMove(1, 1);
 
-        assertTrue(g.getGrid().isOver());
+        assertTrue(g.makeMove(2, 2));
     }
 }

@@ -28,7 +28,6 @@ public class Game3D extends Game {
         this.grid = new Grid3D(size);
     }
 
-    
     /**
      * Methode pour récupérer la grille de jeu
      * 
@@ -57,24 +56,9 @@ public class Game3D extends Game {
                 valid = this.validationInput(coords[0], coords[1]);
                 this.grid.unselectCase(coords[0], coords[1]);
             } while (!valid);
-            this.makeMove(coords[0], coords[1]);
-        }
-    }
+            Boolean win = this.makeMove(coords[0], coords[1]);
 
-    /**
-     * Methode pour jouer un coup
-     * 
-     * @param layer     couche
-     * @param cellNumber numéro de la case dans la couche
-     */
-    public void makeMove(int layer, int cellNumber){ // joue et change de joueur
-        
-        int line = (cellNumber)/this.grid.getGridSize();
-        int column = (cellNumber)%this.grid.getGridSize();
-
-        this.grid.setSymbol(layer, line, column, currentPlayer.getSymbol());
-
-            if (this.grid.winningMove(layer, line, column, currentPlayer.getSymbol())) {
+            if (win) {
                 this.grid.displayGrid();
                 System.out.println("Victoire de "+currentPlayer.getName());
                 this.grid.setOver();
@@ -92,7 +76,24 @@ public class Game3D extends Game {
                     this.currentPlayer = this.player1;
                 }
             }
+        }
+    }
 
+    /**
+     * Methode pour jouer un coup
+     * 
+     * @param layer     couche
+     * @param cellNumber numéro de la case dans la couche
+     * @return le coup est il gagnant
+     */
+    public Boolean makeMove(int layer, int cellNumber){ // joue et change de joueur
+        
+        int line = (cellNumber)/this.grid.getGridSize();
+        int column = (cellNumber)%this.grid.getGridSize();
+
+        this.grid.setSymbol(layer, line, column, currentPlayer.getSymbol());
+
+        return this.grid.winningMove(layer, line, column, currentPlayer.getSymbol());
         }
     
     /**

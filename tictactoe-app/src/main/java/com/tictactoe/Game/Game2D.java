@@ -97,34 +97,17 @@ public class Game2D extends Game{
     /**
      * Methode pour jouer un coup
      * @param cellNumber numero de la case
+     * @return le coup est il gagant
      */
-    public void makeMove(int cellNumber){ // joue et change de joueur
+    public Boolean makeMove(int cellNumber){ // joue et change de joueur
         
         int line = (cellNumber)/this.grid.getGridSize();
         int column = (cellNumber)%this.grid.getGridSize();
 
         this.grid.setSymbol( cellNumber, currentPlayer.getSymbol());
 
-            if (this.grid.winningMove(line, column, currentPlayer.getSymbol())) {
-                this.grid.displayGrid();
-                System.out.println("Victoire de "+currentPlayer.getName());
-                this.grid.setOver();
-            }
-            else if (this.grid.isFull()) {
-                this.grid.displayGrid();
-                System.out.println("Match nul");
-                this.grid.setOver();
-            }
-            else{
-                if (this.currentPlayer == this.player1) {
-                    this.currentPlayer = this.player2;
-                }
-                else{
-                    this.currentPlayer = this.player1;
-                }
-            }
-
-        }
+        return this.grid.winningMove(line, column, currentPlayer.getSymbol());
+    }
     /**
      * Methode pour jouer
      */
@@ -144,7 +127,27 @@ public class Game2D extends Game{
                 valid = this.validationInput(coords);
                 this.grid.unselectCase(coords);
             } while (!valid);
-            this.makeMove(coords);
+            
+            Boolean win = this.makeMove(coords);
+
+            if (win) {
+                this.grid.displayGrid();
+                System.out.println("Victoire de "+currentPlayer.getName());
+                this.grid.setOver();
+            }
+            else if (this.grid.isFull()) {
+                this.grid.displayGrid();
+                System.out.println("Match nul");
+                this.grid.setOver();
+            }
+            else{
+                if (this.currentPlayer == this.player1) {
+                    this.currentPlayer = this.player2;
+                }
+                else{
+                    this.currentPlayer = this.player1;
+                }
+            }
         }
     }
 }
