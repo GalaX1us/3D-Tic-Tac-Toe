@@ -22,8 +22,8 @@ public class Game3D extends Game {
      */
     public Game3D(int size, Scanner scanner) {
         this.scanner = scanner;
-        this.player1 = new Human("James", 'X', scanner);
-        this.player2 = new Human("George", 'O', scanner);
+        this.player1 = new Human("Joueur 1", 'X', scanner);
+        this.player2 = new Human("Joueur 2", 'O', scanner);
         this.currentPlayer = this.player1;
         this.grid = new Grid3D(size);
     }

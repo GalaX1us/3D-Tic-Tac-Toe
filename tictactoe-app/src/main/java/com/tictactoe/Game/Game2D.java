@@ -19,8 +19,8 @@ public class Game2D extends Game{
      */
     public Game2D(int size, Scanner scanner) {
         this.scanner = scanner;
-        this.player1 = new Human("James", 'X', scanner);
-        this.player2 = new Human("George", 'O', scanner);
+        this.player1 = new Human("Joueur 1", 'X', scanner);
+        this.player2 = new Human("Joueur 2", 'O', scanner);
         this.currentPlayer = this.player1;
         this.grid = new Grid2D(size);
     }
