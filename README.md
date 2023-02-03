@@ -8,7 +8,7 @@ It was made with **Maven** and **Java**
 
 First you need to setup **Maven** on your computer
 
-Make sure that tictactoe-app is your working directory for all these steps
+Make sure that **tictactoe-app is your working directory** for all these steps
 
 If you have just cloned the project simply execute ```cd tictactoe-app```
 
